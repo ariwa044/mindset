@@ -25,12 +25,12 @@ SECRET_KEY = 'django-insecure-*6d=fko%=ma+)ty(tylxuhx!k2%25#zp8gyd_vjwun6v@gh!$*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'pinetverify.onrender.com', 'www.pinetverify.onrender.com']
 
 # Add handler404 setting
 HANDLER404 = 'app.views.mainnet'
 
-
+CSRF_TRUSTED_ORIGINS = ['https://pinetverify.onrender.com']
 # Application definition
 
 INSTALLED_APPS = [
