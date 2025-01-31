@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Unavailable - Pi Network</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header {
+            background-color: #783a8c;
+            padding: 12px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .header img {
+            height: 32px;
+        }
+
+        .error-container {
+            max-width: 600px;
+            margin: 80px auto 20px;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .error-code {
+            font-size: 72px;
+            font-weight: 700;
+            color: #783a8c;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .error-description {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .back-button {
+            background-color: #783a8c;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background-color: #662d7a;
+        }
+
+        @media (max-width: 480px) {
+            .error-container {
+                padding: 20px;
+            }
+
+            .error-code {
+                font-size: 48px;
+            }
+
+            .error-message {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{% static 'images/images-pihead.png' %}" alt="Pi Network">
+    </div>
+
+    <div class="error-container">
+        <div class="error-code">{{ error_code }}</div>
+        <h1 class="error-message">{{ error_message }}</h1>
+        <p class="error-description">{{ error_description }}</p>
+        <a href="{% url 'validate' %}" class="back-button">Return to Homepage</a>
+    </div>
+</body>
+</html>
