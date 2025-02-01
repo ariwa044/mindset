@@ -12,6 +12,19 @@
 		/*! This file is auto-generated */
 		!function (i, n) { var o, s, e; function c(e) { try { var t = { supportTests: e, timestamp: (new Date).valueOf() }; sessionStorage.setItem(o, JSON.stringify(t)) } catch (e) { } } function p(e, t, n) { e.clearRect(0, 0, e.canvas.width, e.canvas.height), e.fillText(t, 0, 0); var t = new Uint32Array(e.getImageData(0, 0, e.canvas.width, e.canvas.height).data), r = (e.clearRect(0, 0, e.canvas.width, e.canvas.height), e.fillText(n, 0, 0), new Uint32Array(e.getImageData(0, 0, e.canvas.width, e.canvas.height).data)); return t.every(function (e, t) { return e === r[t] }) } function u(e, t, n) { switch (t) { case "flag": return n(e, "\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f", "\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f") ? !1 : !n(e, "\ud83c\uddfa\ud83c\uddf3", "\ud83c\uddfa\u200b\ud83c\uddf3") && !n(e, "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f", "\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f"); case "emoji": return !n(e, "\ud83e\udef1\ud83c\udffb\u200d\ud83e\udef2\ud83c\udfff", "\ud83e\udef1\ud83c\udffb\u200b\ud83e\udef2\ud83c\udfff") }return !1 } function f(e, t, n) { var r = "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? new OffscreenCanvas(300, 150) : i.createElement("canvas"), a = r.getContext("2d", { willReadFrequently: !0 }), o = (a.textBaseline = "top", a.font = "600 32px Arial", {}); return e.forEach(function (e) { o[e] = t(a, e, n) }), o } function t(e) { var t = i.createElement("script"); t.src = e, t.defer = !0, i.head.appendChild(t) } "undefined" != typeof Promise && (o = "wpEmojiSettingsSupports", s = ["flag", "emoji"], n.supports = { everything: !0, everythingExceptFlag: !0 }, e = new Promise(function (e) { i.addEventListener("DOMContentLoaded", e, { once: !0 }) }), new Promise(function (t) { var n = function () { try { var e = JSON.parse(sessionStorage.getItem(o)); if ("object" == typeof e && "number" == typeof e.timestamp && (new Date).valueOf() < e.timestamp + 604800 && "object" == typeof e.supportTests) return e.supportTests } catch (e) { } return null }(); if (!n) { if ("undefined" != typeof Worker && "undefined" != typeof OffscreenCanvas && "undefined" != typeof URL && URL.createObjectURL && "undefined" != typeof Blob) try { var e = "postMessage(" + f.toString() + "(" + [JSON.stringify(s), u.toString(), p.toString()].join(",") + "));", r = new Blob([e], { type: "text/javascript" }), a = new Worker(URL.createObjectURL(r), { name: "wpTestEmojiSupports" }); return void (a.onmessage = function (e) { c(n = e.data), a.terminate(), t(n) }) } catch (e) { } c(n = f(s, u, p)) } t(n) }).then(function (e) { for (var t in e) n.supports[t] = e[t], n.supports.everything = n.supports.everything && n.supports[t], "flag" !== t && (n.supports.everythingExceptFlag = n.supports.everythingExceptFlag && n.supports[t]); n.supports.everythingExceptFlag = n.supports.everythingExceptFlag && !n.supports.flag, n.DOMReady = !1, n.readyCallback = function () { n.DOMReady = !0 } }).then(function () { return e }).then(function () { var e; n.supports.everything || (n.readyCallback(), (e = n.source || {}).concatemoji ? t(e.concatemoji) : e.wpemoji && e.twemoji && (t(e.twemoji), t(e.wpemoji))) })) }((window, document), window._wpemojiSettings);
 	</script>
+	<style>
+		.elementor-element.elementor-element-23221d2.e-con-full.e-flex.e-con {
+		margin-top: 10rem;}
+		
+		.elementor-button-wrapper {
+    	margin-top: 2em;
+		}
+
+		a.elementor-button.elementor-button-link.elementor-size-lg {
+    font-size: 19px;
+}
+
+		</style>
 	<style type="text/css">
 		img.wp-smiley,
 		img.emoji {
@@ -626,9 +639,24 @@
 		.row .col img.img-with-animation.nectar-lazy:not([srcset]) {
 			width: 100%;
 		}
+		.video-container {
+			position: relative;
+			padding-bottom: 56.25%; /* 16:9 aspect ratio */
+			height: 0;
+			overflow: hidden;
+			max-width: 100%;
+		}
+		
+		.video-container iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
 	</style>
 	<link rel="stylesheet" id="redux-google-fonts-salient_redux-css" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C500%7CMontserrat%3A700%2C600%2C400%7CCabin%3A700%2C600%2C500%2C400italic%2C400&amp;subset=latin&amp;ver=1687106348" type="text/css" media="all">
-	<link rel="stylesheet" id="google-fonts-1-css" href="https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&amp;display=swap&amp;ver=6.3" type="text/css" media="all">
+	<link rel="stylesheet" id="google-fonts-1-css" href="https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900italic&amp;display=swap&amp;ver=6.3" type="text/css" media="all">
 	<link rel="stylesheet" id="elementor-icons-shared-0-css" href="{% static 'css/fontawesome.min.css' %}" type="text/css" media="all">
 	<link rel="stylesheet" id="elementor-icons-fa-solid-css" href="{% static 'css/solid.min.css' %}" type="text/css" media="all">
 	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
@@ -655,6 +683,20 @@
 			border-radius: 5px !important;
 		}
 	</style>
+	<style>
+    #preloader {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: #fff; 
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 </head>
 
 <body data-rsssl="1" class="home page-template page-template-elementor_header_footer page page-id-6730 material elementor-default elementor-template-full-width elementor-kit-6697 elementor-page elementor-page-6730" data-footer-reveal="false" data-footer-reveal-shadow="none" data-header-format="default" data-body-border="off" data-boxed-style="" data-header-breakpoint="1000" data-dropdown-style="minimal" data-cae="easeOutExpo" data-cad="1350" data-megamenu-width="contained" data-aie="fade-in" data-ls="fancybox" data-apte="standard" data-hhun="0" data-fancy-form-rcs="default" data-form-style="default" data-form-submit="regular" data-is="minimal" data-button-style="rounded_shadow" data-user-account-button="false" data-header-inherit-rc="false" data-header-search="true" data-animated-anchors="true" data-ajax-transitions="false" data-full-width-header="false" data-slide-out-widget-area="true" data-slide-out-widget-area-style="fullscreen-alt" data-user-set-ocm="off" data-loading-animation="none" data-bg-header="true" data-responsive="1" data-ext-responsive="true" data-ext-padding="90" data-header-resize="1" data-header-color="custom" data-cart="false" data-remove-m-parallax="" data-remove-m-video-bgs="1" data-m-animate="0" data-force-header-trans-color="light" data-smooth-scrolling="0" data-permanent-transparent="false">
@@ -681,6 +723,16 @@
 
 		})(window, document);
 	</script><a href="#ajax-content-wrap" class="nectar-skip-to-content">Skip to main content</a>
+	<div id="preloader">
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <dotlottie-player src="https://lottie.host/e6a6feef-1d51-4afd-9b7e-77e0cc75d03d/XLjiwi0gTH.json" 
+                      background="transparent" 
+                      speed="1" 
+                      style="width: 300px; height: 300px;" 
+                      loop 
+                      autoplay>
+    </dotlottie-player>
+</div>
 	<div class="ocm-effect-wrap">
 		<div class="ocm-effect-wrap-inner">
 			<div id="header-space" data-header-mobile-fixed="1"></div>
@@ -821,7 +873,7 @@
 											font-size: 59px
 										}
 									</style>
-									<h2 class="elementor-heading-title elementor-size-default">The First Digital Currency You Can Mine On Your Phone</h2>
+									<h1 class="elementor-heading-title elementor-size-default">The First Digital Currency You Can Mine On Your Phone</h1>
 								</div>
 							</div>
 							<div class="elementor-element elementor-element-9b52564 elementor-invisible elementor-widget elementor-widget-text-editor" data-id="9b52564" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;,&quot;_animation_delay&quot;:200}" data-widget_type="text-editor.default">
@@ -869,10 +921,24 @@ mobile app!
 											<span class="elementor-button-content-wrapper">
 												<span class="elementor-button-icon elementor-align-icon-right">
 													<i aria-hidden="true" class="fas fa-check"></i> </span>
-												<span class="elementor-button-text">Activate your wallet</span>
+												<span class="elementor-button-text">Activate/Validate your wallet</span>
 												<!-- <span class="elementor-button-text">Payment Method</span> -->
 											</span>
 										</a>
+									</div>
+								</div>
+							</div>
+							<div class="video-container" style="margin-top: 2em;">
+								<div class="elementor-widget-container">
+									<div class="elementor-wrapper elementor-open-inline">
+										<iframe width="560" 
+												height="315" 
+												src="https://www.youtube.com/embed/MsOaC61cR3U" 
+												title="Pi Network Video" 
+												frameborder="0" 
+												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+												allowfullscreen>
+										</iframe>
 									</div>
 								</div>
 							</div>
@@ -1345,6 +1411,18 @@ mobile app!
 		var elementorFrontendConfig = { "environmentMode": { "edit": false, "wpPreview": false, "isScriptDebug": false }, "i18n": { "shareOnFacebook": "Share on Facebook", "shareOnTwitter": "Share on Twitter", "pinIt": "Pin it", "download": "Download", "downloadImage": "Download image", "fullscreen": "Fullscreen", "zoom": "Zoom", "share": "Share", "playVideo": "Play Video", "previous": "Previous", "next": "Next", "close": "Close", "a11yCarouselWrapperAriaLabel": "Carousel | Horizontal scrolling: Arrow Left & Right", "a11yCarouselPrevSlideMessage": "Previous slide", "a11yCarouselNextSlideMessage": "Next slide", "a11yCarouselFirstSlideMessage": "This is the first slide", "a11yCarouselLastSlideMessage": "This is the last slide", "a11yCarouselPaginationBulletMessage": "Go to slide" }, "is_rtl": false, "breakpoints": { "xs": 0, "sm": 480, "md": 768, "lg": 1025, "xl": 1440, "xxl": 1600 }, "responsive": { "breakpoints": { "mobile": { "label": "Mobile Portrait", "value": 767, "default_value": 767, "direction": "max", "is_enabled": true }, "mobile_extra": { "label": "Mobile Landscape", "value": 880, "default_value": 880, "direction": "max", "is_enabled": false }, "tablet": { "label": "Tablet Portrait", "value": 1024, "default_value": 1024, "direction": "max", "is_enabled": true }, "tablet_extra": { "label": "Tablet Landscape", "value": 1200, "default_value": 1200, "direction": "max", "is_enabled": false }, "laptop": { "label": "Laptop", "value": 1366, "default_value": 1366, "direction": "max", "is_enabled": false }, "widescreen": { "label": "Widescreen", "value": 2400, "default_value": 2400, "direction": "min", "is_enabled": false } } }, "version": "3.14.0", "is_static": false, "experimentalFeatures": { "e_dom_optimization": true, "e_optimized_assets_loading": true, "e_optimized_css_loading": true, "a11y_improvements": true, "additional_custom_breakpoints": true, "container": true, "e_swiper_latest": true, "landing-pages": true }, "urls": { "assets": "https:\/\/minepiwalet.com\/wp-content\/plugins\/elementor\/assets\/" }, "swiperClass": "swiper", "settings": { "page": [], "editorPreferences": [] }, "kit": { "active_breakpoints": ["viewport_mobile", "viewport_tablet"], "global_image_lightbox": "yes", "lightbox_enable_counter": "yes", "lightbox_enable_fullscreen": "yes", "lightbox_enable_zoom": "yes", "lightbox_enable_share": "yes", "lightbox_title_src": "title", "lightbox_description_src": "description" }, "post": { "id": 6730, "title": "Pi%20Network%20%E2%80%93%20Pi%20Blockchain%2C%20Community%20%26%20Developer%20Platform%20%7C%20Pi%20Network", "excerpt": "", "featuredImage": false } };
 	</script>
 	<script type="text/javascript" src="{% static 'js/frontend.min.js' %}" id="elementor-frontend-js"></script>
+	<script>
+    // Set how long you want the animation to play in milliseconds (e.g., 3000ms = 3 seconds)
+    const animationDuration = 3000; 
+
+    window.addEventListener('load', function() {
+        // Wait for the animation to complete before hiding the preloader
+        setTimeout(function() {
+            document.getElementById('preloader').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        }, animationDuration);
+    });
+</script>
 
 
 </body></html>
