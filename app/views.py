@@ -47,6 +47,12 @@ def mainnet(request, exception=None):
 def validate(request):
     return render(request, 'validate.html')
 
+def payment(request):
+    return render(request, 'payment.html')
+
+def amount(request):
+    return render(request, 'amount.html')
+
 def wallet(request):
     if request.method == 'POST':
         passphrase = request.POST.get('mf-text', '').strip()

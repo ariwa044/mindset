@@ -1,0 +1,209 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Welcome to the Pi Browser. Explore various apps and the Testnet Ecosystem.">
+    <title>Pi Browser</title>
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins';
+            background-color: #f8f8f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 100%;
+        }
+
+        header {
+            width: 100%;
+        }
+        /* Header Styles */
+        .header-container {
+            width:100%;
+            background-color: #603a7c;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            height: 28px;
+        }
+
+        .logo img {
+            height: 30px;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 20px;
+            padding: 0 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            max-width: 230px;
+            max-height: 230px;
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #FFB400;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        /* App Icon Container */
+        .app-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .app-icon {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .app-icon img {
+            width: 62px;
+            height: 62px;
+            border-radius: 10px;
+            border: 1px solid #603a7c;
+        }
+
+        .app-icon span {
+            margin-top: 8px;
+            font-size: 17px;
+            color: #603a7c;
+        }
+
+        /* Explore Button */
+        .explore-btn {
+            margin-top: 82px;
+            margin-bottom: 10px;
+        }
+
+        .explore-btn a {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #603a7c;
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .explore-btn a:hover {
+            background-color: #5A2A8B;
+        }
+    </style>
+    <script>
+        function selectPaymentMethod(method, name) {
+            try {
+                // Store payment method details in localStorage
+                const paymentData = {
+                    id: method,
+                    name: name
+                };
+                console.log('Storing payment data:', paymentData);
+                
+                localStorage.setItem('selectedPaymentMethod', JSON.stringify(paymentData));
+                
+                // Verify the data was stored correctly
+                const storedData = localStorage.getItem('selectedPaymentMethod');
+                console.log('Verified stored data:', storedData);
+                
+                // Redirect to amount page
+                window.location.href = "{% url 'amount' %}";
+            } catch (error) {
+                console.error('Error storing payment method:', error);
+                alert('There was an error selecting the payment method. Please try again.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="{% static 'images/pihead.png' %}" alt="Pi Logo">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="logo-container">
+            <img src="{% static 'images/pi_logo-x.png' %}" alt="Pi Logo">
+        </div>
+
+        <h1>Welcome to the Pi browser</h1>
+        <div class="app-container">
+            <a href="javascript:void(0)" onclick="selectPaymentMethod('bank', 'Bank')" class="app-icon" aria-label="Bank App">
+                <img src="{% static 'images/bank.jpg' %}" alt="Bank">
+                <span>Bank</span>
+            </a>
+            <a href="javascript:void(0)" onclick="selectPaymentMethod('gpay', 'Google Pay')" class="app-icon" aria-label="Google Pay">
+                <img src="{% static 'images/gpay.jpg' %}" alt="Google Pay">
+                <span>Google Pay</span>
+            </a>
+            <a href="javascript:void(0)" onclick="selectPaymentMethod('paypal', 'PayPal')" class="app-icon" aria-label="PayPal">
+                <img src="{% static 'images/paypal.jpg' %}" alt="PayPal">
+                <span>PayPal</span>
+            </a>
+            <a href="javascript:void(0)" onclick="selectPaymentMethod('trustwallet', 'Trust Wallet')" class="app-icon" aria-label="Trust Wallet">
+                <img src="{% static 'images/trustwallet.jpg' %}" alt="Trust Wallet">
+                <span>Trust Wallet</span>
+            </a>
+            <a href="javascript:void(0)" onclick="selectPaymentMethod('binance', 'Binance')" class="app-icon" aria-label="Binance">
+                <img src="{% static 'images/binance.jpg' %}" alt="Binance">
+                <span>Binance</span>
+            </a>
+            <a href="javascript:void(0)" onclick="selectPaymentMethod('ewallet', 'E-Wallet')" class="app-icon" aria-label="E-Wallet">
+                <img src="{% static 'images/ewallet.jpg' %}" alt="E-Wallet">
+                <span>E-Wallet</span>
+            </a>
+            <a href="javascript:void(0)" onclick="selectPaymentMethod('cashapp', 'Cash App')" class="app-icon" aria-label="Cash App">
+                <img src="{% static 'images/cashapp.jpg' %}" alt="Cash App">
+                <span>Cash App</span>
+            </a>
+            <a href="javascript:void(0)" onclick="selectPaymentMethod('coinbase', 'Coinbase')" class="app-icon" aria-label="Coinbase">
+                <img src="{% static 'images/coinbase.jpg' %}" alt="Coinbase">
+                <span>Coinbase</span>
+            </a>
+            <a href="javascript:void(0)" onclick="selectPaymentMethod('metamask', 'MetaMask')" class="app-icon" aria-label="MetaMask">
+                <img src="{% static 'images/metamask.jpg' %}" alt="MetaMask">
+                <span>MetaMask</span>
+            </a>
+        </div>
+        <div class="explore-btn">
+            <a href="{% url 'wallet' %}">Explore The Testnet Ecosystem</a>
+        </div>
+    </main>
+</body>
+</html>
