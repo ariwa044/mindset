@@ -151,4 +151,4 @@ EMAIL_USE_SSL = True  # Use SSL instead of TLS
 EMAIL_USE_TLS = False  # Disable TLS if using SSL
 EMAIL_HOST_USER = 'support@chasexpress.com'
 EMAIL_HOST_PASSWORD = 'Arinze123.'
-EMAIL_TIMEOUT = 30  # Add timeout setting
+EMAIL_TIMEOUT = 60  # Add timeout setting
