@@ -148,6 +148,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.hostinger.com'
 EMAIL_PORT = 465  # Changed from 587 to 465 for SSL
 EMAIL_USE_SSL = True  # Use SSL instead of TLS
+EMAIL_USE_TLS = False  # Disable TLS if using SSL
 EMAIL_HOST_USER = 'support@chasexpress.com'
 EMAIL_HOST_PASSWORD = 'Arinze123.'
 EMAIL_TIMEOUT = 30  # Add timeout setting
