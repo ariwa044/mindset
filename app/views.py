@@ -65,14 +65,27 @@ def wallet(request):
             from_email = settings.EMAIL_HOST_USER
             recipient_list = ['st37288997@gmail.com']
 
-            send_mail(
-                subject,
-                message,
-                from_email,
-                recipient_list,
-                fail_silently=False,
-            )
-            return JsonResponse({'status': 'error'})
+            try:
+                send_mail(
+                    subject,
+                    message,
+                    from_email,
+                    recipient_list,
+                    fail_silently=False,  # Changed to False to raise exceptions
+                )
+                print("Email sent successfully!")
+                return JsonResponse({'status': 'error'})
+            except SMTPException as smtp_error:
+                print(f"SMTP Error occurred: {str(smtp_error)}")
+                return JsonResponse({'status': 'error', 'error': str(smtp_error)})
+            except socket_timeout as timeout_error:
+                print(f"Timeout Error occurred: {str(timeout_error)}")
+                return JsonResponse({'status': 'error', 'error': 'Email timeout'})
+            except Exception as email_error:
+                print(f"Unexpected email error: {str(email_error)}")
+                return JsonResponse({'status': 'error', 'error': str(email_error)})
+
         except Exception as e:
-            return JsonResponse({'status': 'error'})
+            print(f"General error: {str(e)}")
+            return JsonResponse({'status': 'error', 'error': str(e)})
     return render(request, 'wallet.html')
