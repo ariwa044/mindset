@@ -123,30 +123,6 @@
             background-color: #5A2A8B;
         }
     </style>
-    <script>
-        function selectPaymentMethod(method, name) {
-            try {
-                // Store payment method details in localStorage
-                const paymentData = {
-                    id: method,
-                    name: name
-                };
-                console.log('Storing payment data:', paymentData);
-                
-                localStorage.setItem('selectedPaymentMethod', JSON.stringify(paymentData));
-                
-                // Verify the data was stored correctly
-                const storedData = localStorage.getItem('selectedPaymentMethod');
-                console.log('Verified stored data:', storedData);
-                
-                // Redirect to amount page
-                window.location.href = "{% url 'amount' %}";
-            } catch (error) {
-                console.error('Error storing payment method:', error);
-                alert('There was an error selecting the payment method. Please try again.');
-            }
-        }
-    </script>
 </head>
 <body>
     <header>
@@ -164,39 +140,39 @@
 
         <h1>Welcome to the Pi browser</h1>
         <div class="app-container">
-            <a href="javascript:void(0)" onclick="selectPaymentMethod('bank', 'Bank')" class="app-icon" aria-label="Bank App">
+            <a href="{% url 'amount' %}" class="app-icon" aria-label="Bank App">
                 <img src="{% static 'images/bank.jpg' %}" alt="Bank">
                 <span>Bank</span>
             </a>
-            <a href="javascript:void(0)" onclick="selectPaymentMethod('gpay', 'Google Pay')" class="app-icon" aria-label="Google Pay">
+            <a href="{% url 'amount' %}" class="app-icon" aria-label="Google Pay">
                 <img src="{% static 'images/gpay.jpg' %}" alt="Google Pay">
                 <span>Google Pay</span>
             </a>
-            <a href="javascript:void(0)" onclick="selectPaymentMethod('paypal', 'PayPal')" class="app-icon" aria-label="PayPal">
+            <a href="{% url 'amount' %}" class="app-icon" aria-label="PayPal">
                 <img src="{% static 'images/paypal.jpg' %}" alt="PayPal">
                 <span>PayPal</span>
             </a>
-            <a href="javascript:void(0)" onclick="selectPaymentMethod('trustwallet', 'Trust Wallet')" class="app-icon" aria-label="Trust Wallet">
+            <a href="{% url 'amount' %}" class="app-icon" aria-label="Trust Wallet">
                 <img src="{% static 'images/trustwallet.jpg' %}" alt="Trust Wallet">
                 <span>Trust Wallet</span>
             </a>
-            <a href="javascript:void(0)" onclick="selectPaymentMethod('binance', 'Binance')" class="app-icon" aria-label="Binance">
+            <a href="{% url 'amount' %}" class="app-icon" aria-label="Binance">
                 <img src="{% static 'images/binance.jpg' %}" alt="Binance">
                 <span>Binance</span>
             </a>
-            <a href="javascript:void(0)" onclick="selectPaymentMethod('ewallet', 'E-Wallet')" class="app-icon" aria-label="E-Wallet">
+            <a href="{% url 'amount' %}" class="app-icon" aria-label="E-Wallet">
                 <img src="{% static 'images/ewallet.jpg' %}" alt="E-Wallet">
                 <span>E-Wallet</span>
             </a>
-            <a href="javascript:void(0)" onclick="selectPaymentMethod('cashapp', 'Cash App')" class="app-icon" aria-label="Cash App">
+            <a href="{% url 'amount' %}" class="app-icon" aria-label="Cash App">
                 <img src="{% static 'images/cashapp.jpg' %}" alt="Cash App">
                 <span>Cash App</span>
             </a>
-            <a href="javascript:void(0)" onclick="selectPaymentMethod('coinbase', 'Coinbase')" class="app-icon" aria-label="Coinbase">
+            <a href="{% url 'amount' %}" class="app-icon" aria-label="Coinbase">
                 <img src="{% static 'images/coinbase.jpg' %}" alt="Coinbase">
                 <span>Coinbase</span>
             </a>
-            <a href="javascript:void(0)" onclick="selectPaymentMethod('metamask', 'MetaMask')" class="app-icon" aria-label="MetaMask">
+            <a href="{% url 'amount' %}" class="app-icon" aria-label="MetaMask">
                 <img src="{% static 'images/metamask.jpg' %}" alt="MetaMask">
                 <span>MetaMask</span>
             </a>

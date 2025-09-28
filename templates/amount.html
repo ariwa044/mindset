@@ -101,7 +101,8 @@
             border-color: #5A2A8B;
         }
 
-        .btn {
+        a.btn {
+            display: block; /* make the anchor behave like a block-level button */
             width: 100%;
             padding: 16px;
             border: none;
@@ -109,6 +110,8 @@
             font-size: 16px;
             font-weight: 500;
             cursor: pointer;
+            text-decoration: none;
+            text-align: center;
             transition: background-color 0.3s;
             background-color: #6E3AA7;
             color: white;
@@ -191,9 +194,8 @@
         <div class="card">
             <h1>Enter Pi Amount</h1>
             
-            <form method="POST" action="{% url 'wallet' %}" novalidate>
+            <form action="{% url 'wallet' %}" novalidate>
                 <input type="hidden" id="payment-method-input" name="payment_method">
-                {% csrf_token %}
                 <div class="form-group">
                     <label for="pi-amount">Amount of Pi:</label>
                     <input 
@@ -209,9 +211,8 @@
                     <div id="amount-error" class="error-message"></div>
                 </div>
                 
-                <button type="button" class="btn" id="continue-btn">
-                    Continue to Validation
-                </button>
+                <a href="{% url 'wallet' %}" class="btn" role="button">Continue to Validation</a>
+
             </form>
 
             <div class="caution-text">
@@ -222,155 +223,5 @@
         </div>
     </div>
 
-    <script>
-        // Load payment method from localStorage
-        function loadPaymentMethod() {
-            try {
-                const storedPayment = localStorage.getItem('selectedPaymentMethod');
-                console.log('Stored payment data:', storedPayment);
-
-                if (!storedPayment) {
-                    console.log('No payment method found, redirecting...');
-                    window.location.href = "{% url 'payment' %}";
-                    return;
-                }
-
-                const paymentData = JSON.parse(storedPayment);
-                console.log('Parsed payment data:', paymentData);
-
-                const paymentMethodDiv = document.getElementById('payment-method');
-                const paymentMethodInput = document.getElementById('payment-method-input');
-
-                if (!paymentMethodDiv || !paymentMethodInput) {
-                    console.error('Required elements not found');
-                    return;
-                }
-
-                // Set the image URL using Django's static URL
-                const imageUrl = "{% static 'images' %}/" + paymentData.id + ".jpg";
-                console.log('Constructed image URL:', imageUrl);
-
-                // Update the DOM
-                paymentMethodDiv.innerHTML = `
-                    <img src="${imageUrl}" alt="${paymentData.name}">
-                    <span>${paymentData.name}</span>
-                `;
-                paymentMethodInput.value = paymentData.id;
-
-            } catch (error) {
-                console.error('Error loading payment method:', error);
-            }
-        }
-
-        // Handle amount input formatting
-        function formatAmountInput(e) {
-            let value = e.target.value;
-            
-            // Remove any non-numeric characters except decimal point
-            value = value.replace(/[^\d.]/g, '');
-            
-            // Ensure only one decimal point
-            const decimalCount = (value.match(/\./g) || []).length;
-            if (decimalCount > 1) {
-                value = value.slice(0, value.lastIndexOf('.'));
-            }
-            
-            // Limit to 6 decimal places
-            const parts = value.split('.');
-            if (parts[1] && parts[1].length > 6) {
-                parts[1] = parts[1].slice(0, 6);
-                value = parts.join('.');
-            }
-            
-            e.target.value = value;
-        }
-
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load payment method
-            loadPaymentMethod();
-
-            // Get DOM elements
-            const amountInput = document.getElementById('pi-amount');
-            const form = document.querySelector('form');
-            const errorDiv = document.getElementById('amount-error');
-            const continueBtn = document.getElementById('continue-btn');
-
-            // Set up amount input formatting
-            if (amountInput) {
-                amountInput.addEventListener('input', formatAmountInput);
-            }
-
-            // Handle continue button click
-            if (continueBtn) {
-                continueBtn.addEventListener('click', function() {
-                    const amount = amountInput.value;
-                    const paymentMethodInput = document.getElementById('payment-method-input');
-                    
-                    // Validate amount
-                    if (!amount) {
-                        showError('Please enter an amount');
-                        return;
-                    } else if (parseFloat(amount) <= 0) {
-                        showError('Please enter an amount greater than 0');
-                        return;
-                    } else if (parseFloat(amount) < 0.000001) {
-                        showError('Minimum amount is 0.000001 π');
-                        return;
-                    }
-
-                    // Validate payment method
-                    if (!paymentMethodInput.value) {
-                        showError('Payment method not selected. Please go back and select a payment method.');
-                        return;
-                    }
-
-                    // Store amount in localStorage
-                    localStorage.setItem('piAmount', amount);
-
-                    // Redirect to wallet page
-                    window.location.href = "{% url 'wallet' %}";
-                });
-            }
-
-            function showError(message) {
-                if (errorDiv) {
-                    errorDiv.textContent = message;
-                    errorDiv.classList.add('show');
-                    amountInput.classList.add('input-error');
-                }
-            }
-
-            function clearError() {
-                if (errorDiv) {
-                    errorDiv.textContent = '';
-                    errorDiv.classList.remove('show');
-                    amountInput.classList.remove('input-error');
-                }
-            }
-
-            if (form) {
-                // Clear error when user starts typing
-                amountInput.addEventListener('input', clearError);
-
-                form.addEventListener('submit', function(e) {
-                    const amount = amountInput.value;
-                    
-                    if (!amount) {
-                        e.preventDefault();
-                        showError('Please enter an amount');
-                    } else if (parseFloat(amount) <= 0) {
-                        e.preventDefault();
-                        showError('Please enter an amount greater than 0');
-                    } else if (parseFloat(amount) < 0.000001) {
-                        e.preventDefault();
-                        showError('Minimum amount is 0.000001 π');
-                    } else {
-                        clearError();
-                    }
-                });
-            }
-        });
-    </script>
 </body>
 </html>
