@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['*', 'mindsetpi-v2-production.up.railway.app', 'https://mindset
 # Add handler404 setting
 HANDLER404 = 'app.views.mainnet'
 
-CSRF_TRUSTED_ORIGINS = ['https://mindsetpi-v2-production.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://mindsetpi-v2-production.up.railway.app']
 # Application definition
 
 INSTALLED_APPS = [
