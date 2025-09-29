@@ -25,12 +25,12 @@ SECRET_KEY = 'django-insecure-*6d=fko%=ma+)ty(tylxuhx!k2%25#zp8gyd_vjwun6v@gh!$*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'https://pi-ecosystem.onrender.com', 'www.pi-ecosystem.onrender.com']
+ALLOWED_HOSTS = ['*', 'https://mindsetpi-v2-production.up.railway.app/']
 
 # Add handler404 setting
 HANDLER404 = 'app.views.mainnet'
 
-CSRF_TRUSTED_ORIGINS = ['https://pi-ecosystem.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://mindsetpi-v2-production.up.railway.app/']
 # Application definition
 
 INSTALLED_APPS = [
